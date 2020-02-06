@@ -1,3 +1,6 @@
 function love.conf(t)
-  t.title = 'Alice'
+  t.window.title = 'Alice'
+
+  t.modules.mouse = false
+  t.modules.touch = false
 end

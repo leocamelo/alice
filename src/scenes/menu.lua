@@ -42,11 +42,10 @@ function scene:keypressed(key)
 end
 
 function scene:draw()
-  love.graphics.print('*menu*', 350, 200)
-
   for i, option in ipairs(options) do
-    local prefix = i == selected and '> ' or ''
-    love.graphics.print(prefix .. option.label, 350, 200 + i * 20)
+    local color = i == selected and 1 or 0.5
+    love.graphics.setColor(color, color, color)
+    love.graphics.print(option.label, 350, 200 + i * 20)
   end
 end
 

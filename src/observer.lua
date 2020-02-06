@@ -22,9 +22,9 @@ function Observer:observe(key, callback)
   list[#list + 1] = callback
 end
 
-function Observer:trigger(key)
+function Observer:trigger(key, ...)
   for _, callback in ipairs(self.callbacks[key]) do
-    callback()
+    callback(...)
   end
 end
 
