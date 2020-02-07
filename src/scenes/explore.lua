@@ -12,6 +12,7 @@ function scene:load()
     require('src.systems.anim_update_system'),
     require('src.systems.anim_draw_system'),
     require('src.systems.move_system'),
+    require('src.systems.attack_system'),
     player
   )
 end
