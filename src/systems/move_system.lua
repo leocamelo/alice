@@ -9,11 +9,11 @@ system.filter = tiny.requireAll('status', 'direction', 'x', 'y', 'speed')
 function system:process(e, dt)
   local running = false
 
-  for key, dir in ipairs(e.directions) do
-    if love.keyboard.isDown(dir) then
+  for key, value in ipairs(e.directions) do
+    if love.keyboard.isDown(value) then
       e.direction = key
       e.status = e.statuses.running
-      observer:trigger(dir, e, dt)
+      observer:trigger(value, e, dt)
       running = true
       break
     end

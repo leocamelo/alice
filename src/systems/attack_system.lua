@@ -1,7 +1,7 @@
 local tiny = require('vendor.tiny')
 local system = tiny.processingSystem()
 
-system.filter = tiny.requireAll('status', 'is_attacking')
+system.filter = tiny.requireAll('is_attacking')
 
 function system:process(e, dt)
   if love.keyboard.isDown('z') then
