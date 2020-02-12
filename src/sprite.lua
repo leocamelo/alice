@@ -7,7 +7,7 @@ function Sprite.new(name, w, h)
   local self = {}
 
   self.image = love.graphics.newImage(string.format(path, name))
-  self.grid = anim8.newGrid(w, h, self.image:getWidth(), self.image:getHeight())
+  self.grid = anim8.newGrid(w, h, self.image:getDimensions())
 
   return self
 end
