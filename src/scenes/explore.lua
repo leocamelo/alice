@@ -6,15 +6,15 @@ local world
 
 function scene:load()
   local Player = require('src.entities.player')
-  local player = Player.new(350, 350)
 
   world = World.new(
     require('src.systems.anim_update_system'),
     require('src.systems.anim_draw_system'),
     require('src.systems.move_system'),
-    require('src.systems.attack_system'),
-    player
+    require('src.systems.attack_system')
   )
+
+  world:add(Player.new(350, 350))
 end
 
 function scene:keypressed(key)

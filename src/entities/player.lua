@@ -2,16 +2,15 @@ local Enum = require('src.enum')
 local Sprite = require('src.sprite')
 local Anim = require('src.anim')
 
+local Status = Enum.new('iddle', 'running')
+local Direction = Enum.new('up', 'down', 'left', 'right')
+
 local Player = {}
 Player.__index = Player
 
 Player.w = 84
 Player.h = 84
 Player.speed = 300
-
-Player.statuses = Enum.new('iddle', 'running')
-Player.directions = Enum.new('up', 'down', 'left', 'right')
-
 Player.sprite = Sprite.new('player', Player.w, Player.h)
 
 Player.anims = {
@@ -34,8 +33,8 @@ function Player.new(x, y)
   self.x = x
   self.y = y
 
-  self.status = self.statuses.iddle
-  self.direction = self.directions.down
+  self.status = Status.iddle()
+  self.direction = Direction.down()
 
   self.is_attacking = false
 
@@ -43,10 +42,8 @@ function Player.new(x, y)
 end
 
 function Player:anim()
-  local status = self.is_attacking and 'attacking' or self.statuses[self.status]
-  local direction = self.directions[self.direction]
-
-  return self.anims[string.format('%s_%s', status, direction)]
+  local status = self.is_attacking and 'attacking' or self.status:to_s()
+  return self.anims[string.format('%s_%s', status, self.direction:to_s())]
 end
 
 return Player
