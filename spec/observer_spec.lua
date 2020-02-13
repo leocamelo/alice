@@ -1,10 +1,14 @@
 local Observer = require('src.observer')
 
 describe('Observer', function()
+  local observer
+
+  before_each(function()
+    observer = Observer.new()
+  end)
+
   describe('.new', function()
     it('assigns default callbacks', function()
-      local observer = Observer.new()
-
       assert.are.same(observer.callbacks, {})
       assert.are.same(observer.callbacks.foo, {})
     end)
@@ -12,8 +16,6 @@ describe('Observer', function()
 
   describe(':observe', function()
     it('adds callback to key', function()
-      local observer = Observer.new()
-
       local callback = function() end
       observer:observe('foo', callback)
 
@@ -24,10 +26,8 @@ describe('Observer', function()
 
   describe(':trigger', function()
     it('calls matched callbacks by key', function()
-      local observer = Observer.new()
-
-      local callback1 = spy.new(function() end)
-      local callback2 = spy.new(function() end)
+      local callback1 = spy.new()
+      local callback2 = spy.new()
       observer:observe('foo', callback1)
       observer:observe('foo', callback2)
       observer:trigger('foo', 'bar')

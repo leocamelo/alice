@@ -2,10 +2,10 @@ local Game = require('src.game')
 local game
 
 function love.load()
-  game = Game.new({
+  game = Game.new(
     require('src.scenes.menu'),
     require('src.scenes.explore')
-  })
+  )
 end
 
 function love.keypressed(key)

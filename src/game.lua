@@ -1,15 +1,15 @@
 local Game = {}
 Game.__index = Game
 
-function Game.new(scenes)
+function Game.new(initscene, ...)
   local self = setmetatable({}, Game)
 
   self.scenes = {}
-  for _, scene in ipairs(scenes) do
+  for _, scene in ipairs({initscene, ...}) do
     self.scenes[scene.id] = scene
   end
 
-  self:play(scenes[1].id)
+  self:play(initscene.id)
   return self
 end
 
@@ -21,8 +21,8 @@ function Game:callback(key, ...)
   end
 end
 
-function Game:play(scene)
-  self.curscene = self.scenes[scene]
+function Game:play(scene_id)
+  self.curscene = self.scenes[scene_id]
 
   if not self.curscene.loaded then
     self:callback('load')
