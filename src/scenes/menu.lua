@@ -4,7 +4,8 @@ local scene = Scene.new('menu')
 local Observer = require('src.observer')
 local observer = Observer.new()
 
-local options, selected
+local options
+local selected
 
 function scene:load()
   options = {

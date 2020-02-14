@@ -1,10 +1,14 @@
 local tiny = require('vendor.tiny')
 local system = tiny.processingSystem()
 
-local Observer = require('src.observer')
-local observer = Observer.new()
-
 system.filter = tiny.requireAll('x', 'y', 'speed', 'status', 'direction')
+
+local deltas = {up = {0, -1}, down = {0, 1}, left = {-1, 0}, right = {1, 0}};
+
+local function apply_deltas(e, dir, dt)
+  local dx, dy = unpack(deltas[dir]);
+  return e.x + (e.speed * dt * dx), e.y + (e.speed * dt * dy)
+end
 
 function system:process(e, dt)
   local running = false
@@ -13,7 +17,7 @@ function system:process(e, dt)
     if love.keyboard.isDown(dir) then
       e.status.running()
       e.direction.index = i
-      observer:trigger(dir, self.physics, e, dt)
+      e.x, e.y = self.physics:move(e, apply_deltas(e, dir, dt))
       running = true
       break
     end
@@ -24,21 +28,5 @@ function system:process(e, dt)
     e.direction.down()
   end
 end
-
-observer:observe('up', function(physics, e, dt)
-  e.x, e.y = physics:move(e, e.x, e.y - e.speed * dt)
-end)
-
-observer:observe('down', function(physics, e, dt)
-  e.x, e.y = physics:move(e, e.x, e.y + e.speed * dt)
-end)
-
-observer:observe('left', function(physics, e, dt)
-  e.x, e.y = physics:move(e, e.x - e.speed * dt, e.y)
-end)
-
-observer:observe('right', function(physics, e, dt)
-  e.x, e.y = physics:move(e, e.x + e.speed * dt, e.y)
-end)
 
 return system

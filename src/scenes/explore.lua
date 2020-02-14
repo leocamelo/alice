@@ -5,8 +5,6 @@ local World = require('src.world')
 local world
 
 function scene:load()
-  local Player = require('src.entities.player')
-
   world = World.new(
     require('src.systems.anim_update_system'),
     require('src.systems.anim_draw_system'),
@@ -14,6 +12,7 @@ function scene:load()
     require('src.systems.attack_system')
   )
 
+  local Player = require('src.entities.player')
   world:add(Player.new(350, 350))
 end
 

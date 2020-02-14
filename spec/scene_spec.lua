@@ -3,7 +3,7 @@ local Scene = require('src.scene')
 describe('Scene', function()
   local scene
 
-  setup(function()
+  before_each(function()
     scene = Scene.new('foo')
   end)
 
