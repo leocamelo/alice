@@ -1,6 +1,5 @@
 local Enum = require('src.enum')
 local Sprite = require('src.sprite')
-local Anim = require('src.anim')
 
 local Status = Enum.new('iddle', 'running')
 local Direction = Enum.new('up', 'down', 'left', 'right')
@@ -17,14 +16,14 @@ Player.sprite = Sprite.new('player', Player.w, Player.h)
 
 Player.anims = {
   iddle = {
-    up = Anim.new(Player.sprite, 0.1, '1-4', 1),
-    down = Anim.new(Player.sprite, 0.1, '1-4', 2),
-    right = Anim.new(Player.sprite, 0.1, '1-4', 3)
+    up = Player.sprite:anim(0.1, '1-4', 1),
+    down = Player.sprite:anim(0.1, '1-4', 2),
+    right = Player.sprite:anim(0.1, '1-4', 3)
   },
   running = {
-    up = Anim.new(Player.sprite, 0.1, '1-4', 4),
-    down = Anim.new(Player.sprite, 0.1, '1-4', 5),
-    right = Anim.new(Player.sprite, 0.1, '1-4', 6)
+    up = Player.sprite:anim(0.1, '1-4', 4),
+    down = Player.sprite:anim(0.1, '1-4', 5),
+    right = Player.sprite:anim(0.1, '1-4', 6)
   }
 }
 
@@ -36,7 +35,7 @@ Player.Collider.__index = Player.Collider
 
 Player.Collider.w = 32
 Player.Collider.h = 32
-Player.Collider.offset = { x = 16, y = 32 }
+Player.Collider.offset = {x = 16, y = 32}
 
 function Player.new(x, y)
   local self = setmetatable({}, Player)
@@ -44,7 +43,7 @@ function Player.new(x, y)
   self.status = Status.iddle()
   self.direction = Direction.down()
 
-  self.collider = setmetatable({}, Player.Collider)
+  self.collider = setmetatable({}, self.Collider)
   self:move(x + self.collider.offset.x, y + self.collider.offset.y)
 
   return self

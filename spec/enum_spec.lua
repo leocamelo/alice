@@ -14,7 +14,7 @@ describe('Enum', function()
     end)
   end)
 
-  describe(':option', function()
+  describe(':{option}', function()
     local case
 
     before_each(function()
@@ -32,7 +32,24 @@ describe('Enum', function()
     end)
   end)
 
-  describe('Case:option', function()
+  describe(':case', function()
+    local case
+
+    before_each(function()
+      case = enum:case('foo')
+    end)
+
+    it('returns a case with selected option', function()
+      assert.are.equals(case.index, 1)
+    end)
+
+    it('assign options as setters', function()
+      assert.are.equals(type(case.foo), 'function')
+      assert.are.equals(type(case.bar), 'function')
+    end)
+  end)
+
+  describe('Case:{option}', function()
     it('sets the selected option index', function()
       local case = enum.foo()
       assert.are.equals(case.index, 1)

@@ -1,18 +1,29 @@
 local Enum = {}
+Enum.__index = Enum
+
 local EnumCase = {}
 EnumCase.__index = EnumCase
 
 function Enum.new(...)
-  local self = {}
-  local options = {...}
+  local self = setmetatable({}, Enum)
 
-  for i, option in ipairs(options) do
+  self.options = {...}
+  self.options_index = {}
+
+  for i, option in ipairs(self.options) do
+    self.options_index[option] = i
+
     self[option] = function()
-      return EnumCase.new(i, options)
+      return EnumCase.new(i, self.options)
     end
   end
 
   return self
+end
+
+function Enum:case(option)
+  local index = self.options_index[option]
+  return EnumCase.new(index, self.options)
 end
 
 function EnumCase.new(index, options)

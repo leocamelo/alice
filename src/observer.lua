@@ -4,16 +4,21 @@ Observer.__index = Observer
 local callbacks_mt = {}
 
 function callbacks_mt.__index(tab, key)
-  if not rawget(tab, key) then
-    rawset(tab, key, {})
+  local value = rawget(tab, key)
+
+  if not value then
+    value = {}
+    rawset(tab, key, value)
   end
 
-  return rawget(tab, key)
+  return value
 end
 
 function Observer.new()
   local self = setmetatable({}, Observer)
+
   self.callbacks = setmetatable({}, callbacks_mt)
+
   return self
 end
 
