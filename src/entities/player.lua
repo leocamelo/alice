@@ -31,16 +31,31 @@ Player.anims = {
 Player.anims.iddle.left = Player.anims.iddle.right:clone():flipH()
 Player.anims.running.left = Player.anims.running.right:clone():flipH()
 
+Player.Collider = {}
+Player.Collider.__index = Player.Collider
+
+Player.Collider.w = 32
+Player.Collider.h = 32
+Player.Collider.offset = { x = 16, y = 32 }
+
 function Player.new(x, y)
   local self = setmetatable({}, Player)
-
-  self.x = x
-  self.y = y
 
   self.status = Status.iddle()
   self.direction = Direction.down()
 
+  self.collider = setmetatable({}, Player.Collider)
+  self:move(x + self.collider.offset.x, y + self.collider.offset.y)
+
   return self
+end
+
+function Player:move(x, y)
+  self.collider.x = x
+  self.collider.y = y
+
+  self.x = x - self.collider.offset.x
+  self.y = y - self.collider.offset.y
 end
 
 function Player:anim()

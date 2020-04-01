@@ -24,7 +24,9 @@ end
 
 function World:add(e)
   self.tiny:add(e)
-  self.bump:add(e, e.x, e.y, e.w, e.h)
+
+  local c = e.collider
+  self.bump:add(c, c.x, c.y, c.w, c.h)
 end
 
 function World:update(dt)
@@ -33,6 +35,13 @@ end
 
 function World:draw()
   self.tiny:update(0, drawer_filter)
+
+  if os.getenv('DEBUG') then
+    for _, i in pairs(self.bump:getItems()) do
+      love.graphics.setColor(1, 0, 0)
+      love.graphics.rectangle('line', i.x, i.y, i.w, i.h)
+    end
+  end
 end
 
 return World

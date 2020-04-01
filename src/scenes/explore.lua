@@ -16,6 +16,10 @@ function scene:load()
     require('src.systems.player_move_system')
   )
 
+  local Enemy = require('src.entities.enemy')
+  world:add(Enemy.new(100, 100))
+  world:add(Enemy.new(500, 100))
+
   local Player = require('src.entities.player')
   world:add(Player.new(state.x, state.y))
 end
