@@ -43,6 +43,8 @@ function scene:keypressed(key)
 end
 
 function scene:draw()
+  love.graphics.setBackgroundColor(0, 0, 0)
+
   for i, option in ipairs(options) do
     local color = i == selected and 1 or 0.5
     love.graphics.setColor(color, color, color)

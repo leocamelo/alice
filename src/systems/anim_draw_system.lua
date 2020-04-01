@@ -4,7 +4,7 @@ local system = tiny.processingSystem()
 system.drawer = true
 system.filter = tiny.requireAll('anim')
 
-function system:process(e, dt)
+function system:process(e)
   local anim = e:anim()
 
   if anim then

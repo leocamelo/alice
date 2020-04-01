@@ -4,16 +4,20 @@ local scene = Scene.new('explore')
 local World = require('src.world')
 local world
 
+local state = {
+  x = 350,
+  y = 350
+}
+
 function scene:load()
   world = World.new(
     require('src.systems.anim_update_system'),
     require('src.systems.anim_draw_system'),
-    require('src.systems.move_system'),
-    require('src.systems.attack_system')
+    require('src.systems.player_move_system')
   )
 
   local Player = require('src.entities.player')
-  world:add(Player.new(350, 350))
+  world:add(Player.new(state.x, state.y))
 end
 
 function scene:keypressed(key)
@@ -27,6 +31,8 @@ function scene:update(dt)
 end
 
 function scene:draw()
+  love.graphics.setBackgroundColor(0.3, 0.5, 0.3)
+
   love.graphics.setColor(1, 1, 1)
   love.graphics.print('press esc to back', 50, 550)
 

@@ -1,13 +1,13 @@
 local tiny = require('vendor.tiny')
 local bump = require('vendor.bump')
 
+local updater_filter = tiny.rejectAll('drawer')
+local drawer_filter = tiny.requireAll('drawer')
+
 local World = {}
 World.__index = World
 
-World.cell_size = 32
-
-local updater_filter = tiny.rejectAll('drawer')
-local drawer_filter = tiny.requireAll('drawer')
+World.cell_size = 64
 
 function World.new(...)
   local self = setmetatable({}, World)
