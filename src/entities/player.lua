@@ -11,8 +11,14 @@ Player.is_player = true
 
 Player.w = 64
 Player.h = 64
-Player.speed = 300
 Player.sprite = Sprite.new('player', Player.w, Player.h)
+
+Player.speed = 300
+Player.collider_w = 32
+Player.collider_h = 32
+Player.collider_offset = {x = 16, y = 32}
+
+Player.card_offset = {x = 16, y = -74}
 
 Player.anims = {
   iddle = {
@@ -30,31 +36,37 @@ Player.anims = {
 Player.anims.iddle.left = Player.anims.iddle.right:clone():flipH()
 Player.anims.running.left = Player.anims.running.right:clone():flipH()
 
-Player.Collider = {}
-Player.Collider.__index = Player.Collider
-
-Player.Collider.w = 32
-Player.Collider.h = 32
-Player.Collider.offset = {x = 16, y = 32}
-
 function Player.new(x, y)
   local self = setmetatable({}, Player)
 
   self.status = Status.iddle()
   self.direction = Direction.down()
 
-  self.collider = setmetatable({}, self.Collider)
-  self:move(x + self.collider.offset.x, y + self.collider.offset.y)
+  self.collider = {w = self.collider_w, h = self.collider_h}
+  self:move(x + self.collider_offset.x, y + self.collider_offset.y)
 
   return self
+end
+
+function Player:update()
+  self.x = self.collider.x - self.collider_offset.x
+  self.y = self.collider.y - self.collider_offset.y
+
+  if self.card then
+    self.card.x = self.x + self.card_offset.x
+    self.card.y = self.y + self.card_offset.y
+  end
 end
 
 function Player:move(x, y)
   self.collider.x = x
   self.collider.y = y
+  self:update()
+end
 
-  self.x = x - self.collider.offset.x
-  self.y = y - self.collider.offset.y
+function Player:set_card(card)
+  self.card = card
+  self:update()
 end
 
 function Player:anim()

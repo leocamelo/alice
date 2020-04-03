@@ -15,14 +15,15 @@ Card.sprite = Sprite.new('card', Card.w, Card.h)
 function Card.new(suit, number)
   local self = setmetatable({}, Card)
 
-  self.suit = Suits.case(suit)
+  self.suit = Suits:case(suit)
   self.number = number
+  self.opacity = 1.5
 
   return self
 end
 
-function Card:draw()
-  return self.sprite.grid:getFrames(self.suit.index, self.number)
+function Card:quad()
+  return self.sprite:quad(self.number, self.suit.index)
 end
 
 return Card

@@ -36,6 +36,10 @@ function EnumCase.new(index, options)
     self[option] = function()
       self.index = i
     end
+
+    self['is_' .. option] = function()
+      return self.index == i
+    end
   end
 
   return self

@@ -16,17 +16,29 @@ function World.new(...)
   self.bump = bump.newWorld(self.cell_size)
 
   for _, system in pairs(self.tiny.systems) do
+    system.world = self
     system.physics = self.bump
   end
 
   return self
 end
 
-function World:add(e)
-  self.tiny:add(e)
+function World:add(entity)
+  self.tiny:add(entity)
+  local c = entity.collider
 
-  local c = e.collider
-  if c then self.bump:add(c, c.x, c.y, c.w, c.h) end
+  if c then
+    self.bump:add(c, c.x, c.y, c.w, c.h)
+  end
+end
+
+function World:remove(entity)
+  self.tiny:remove(entity)
+  local c = entity.collider
+
+  if c and self.bump:hasItem(c) then
+    self.bump:remove(c)
+  end
 end
 
 function World:update(dt)

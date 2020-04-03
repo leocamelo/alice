@@ -18,4 +18,8 @@ function Sprite:anim(speed, ...)
   return anim8.newAnimation(self.grid:getFrames(...), speed)
 end
 
+function Sprite:quad(x, y)
+  return self.grid:getFrames(x, y)[1]
+end
+
 return Sprite
