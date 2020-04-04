@@ -3,16 +3,7 @@ local system = tiny.processingSystem()
 
 system.filter = tiny.requireAll('is_player')
 
-local vectors = {up = {0, -1}, down = {0, 1}, left = {-1, 0}, right = {1, 0}}
-
-local function apply_dir(e, dir, dt)
-  local vx, vy = unpack(vectors[dir])
-
-  local dx = e.speed * dt * vx
-  local dy = e.speed * dt * vy
-
-  return e.collider.x + dx, e.collider.y + dy
-end
+local Direction = require('src.direction')
 
 function system:process(e, dt)
   local is_running = false
@@ -21,7 +12,10 @@ function system:process(e, dt)
     if love.keyboard.isDown(dir) then
       e.status.running()
       e.direction.index = i
-      e:move(self.physics:move(e.collider, apply_dir(e, dir, dt)))
+
+      local gx, gy = Direction.apply(e, dir, dt)
+      e:move(self.physics:move(e.collider, gx, gy, e.collision_filter))
+
       is_running = true
       break
     end

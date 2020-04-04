@@ -14,8 +14,9 @@ function system:process(e, dt)
       e.card = nil
     end
   elseif love.keyboard.isDown('a') and e.status.is_iddle() then
-    e:set_card(Card.new('sword', math.random(1, 13)))
+    e:set_card(Card.new('sword', math.random(1, 4)))
     self.world:add(e.card)
+    self.world:add(e.card:cast(e))
   end
 end
 

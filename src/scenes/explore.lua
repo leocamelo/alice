@@ -13,6 +13,7 @@ function scene:load()
   world = World.new(
     require('src.systems.player_move_system'),
     require('src.systems.player_attack_system'),
+    require('src.systems.spell_system'),
     require('src.systems.anim_update_system'),
     require('src.systems.anim_draw_system'),
     require('src.systems.static_draw_system')

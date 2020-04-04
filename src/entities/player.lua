@@ -1,8 +1,8 @@
 local Enum = require('src.enum')
 local Sprite = require('src.sprite')
+local Direction = require('src.direction')
 
 local Status = Enum.new('iddle', 'running')
-local Direction = Enum.new('up', 'down', 'left', 'right')
 
 local Player = {}
 Player.__index = Player
@@ -16,9 +16,13 @@ Player.sprite = Sprite.new('player', Player.w, Player.h)
 Player.speed = 300
 Player.collider_w = 32
 Player.collider_h = 32
-Player.collider_offset = {x = 16, y = 32}
+Player.collider_offset = {
+  x = (Player.w - Player.collider_w) / 2,
+  y = Player.h - Player.collider_h
+}
 
-Player.card_offset = {x = 16, y = -74}
+Player.card_offset = 16
+Player.spell_offset = 8
 
 Player.anims = {
   iddle = {
@@ -42,7 +46,7 @@ function Player.new(x, y)
   self.status = Status.iddle()
   self.direction = Direction.down()
 
-  self.collider = {w = self.collider_w, h = self.collider_h}
+  self.collider = {entity = self, w = self.collider_w, h = self.collider_h}
   self:move(x + self.collider_offset.x, y + self.collider_offset.y)
 
   return self
@@ -53,8 +57,8 @@ function Player:update()
   self.y = self.collider.y - self.collider_offset.y
 
   if self.card then
-    self.card.x = self.x + self.card_offset.x
-    self.card.y = self.y + self.card_offset.y
+    self.card.x = self.x + self.card_offset
+    self.card.y = self.y - (self.card.h + self.card_offset)
   end
 end
 
@@ -62,6 +66,12 @@ function Player:move(x, y)
   self.collider.x = x
   self.collider.y = y
   self:update()
+end
+
+function Player:collision_filter(other)
+  if other.entity.is_enemy then
+    return 'slide'
+  end
 end
 
 function Player:set_card(card)

@@ -12,18 +12,29 @@ Card.w = 34
 Card.h = 58
 Card.sprite = Sprite.new('card', Card.w, Card.h)
 
+Card.spells = {
+  sword = {
+    require('src.entities.spells.sword_page')
+  }
+}
+
 function Card.new(suit, number)
   local self = setmetatable({}, Card)
 
   self.suit = Suits:case(suit)
   self.number = number
+
   self.opacity = 1.5
 
   return self
 end
 
+function Card:cast(player)
+  return self.spells[self.suit:to_s()][1].new(player)
+end
+
 function Card:quad()
-  return self.sprite:quad(self.number, self.suit.index)
+  return self.sprite:quad(self.suit.index, self.number)
 end
 
 return Card

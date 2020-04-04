@@ -13,12 +13,18 @@ Enemy.anims = {Enemy.sprite:anim(1, 1, 1)}
 function Enemy.new(x, y)
   local self = setmetatable({}, Enemy)
 
+  self.collider = {entity = self, w = self.w, h = self.h}
+  self:move(x, y)
+
+  return self
+end
+
+function Enemy:move(x, y)
   self.x = x
   self.y = y
 
-  self.collider = {x = x, y = y, w = self.w, h = self.h}
-
-  return self
+  self.collider.x = x
+  self.collider.y = y
 end
 
 function Enemy:anim()
