@@ -1,7 +1,7 @@
 local Scene = require('src.scene')
-local scene = Scene.new('explore')
-
 local World = require('src.world')
+
+local scene = Scene.new('explore')
 local world
 
 local state = {

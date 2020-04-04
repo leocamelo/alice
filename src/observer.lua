@@ -1,6 +1,6 @@
-local Observer = {}
-Observer.__index = Observer
+local Class = require('src.class')
 
+local Observer = Class.new()
 local callbacks_mt = {}
 
 function callbacks_mt.__index(tab, key)
@@ -14,12 +14,8 @@ function callbacks_mt.__index(tab, key)
   return value
 end
 
-function Observer.new()
-  local self = setmetatable({}, Observer)
-
+function Observer:init()
   self.callbacks = setmetatable({}, callbacks_mt)
-
-  return self
 end
 
 function Observer:observe(key, callback)

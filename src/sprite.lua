@@ -1,17 +1,13 @@
 local anim8 = require('vendor.anim8')
+local Class = require('src.class')
 
-local Sprite = {}
-Sprite.__index = Sprite
+local Sprite = Class.new()
 
 Sprite.path = 'assets/sprites/%s.png'
 
-function Sprite.new(name, w, h)
-  local self = setmetatable({}, Sprite)
-
+function Sprite:init(name, w, h)
   self.image = love.graphics.newImage(self.path:format(name))
   self.grid = anim8.newGrid(w, h, self.image:getDimensions())
-
-  return self
 end
 
 function Sprite:anim(speed, ...)

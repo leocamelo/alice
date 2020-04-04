@@ -1,22 +1,17 @@
+local Class = require('src.class')
 local Sprite = require('src.sprite')
 
-local Enemy = {}
-Enemy.__index = Enemy
+local Enemy = Class.new()
 
 Enemy.is_enemy = true
 
 Enemy.w = 64
 Enemy.h = 128
 Enemy.sprite = Sprite.new('enemy', Enemy.w, Enemy.h)
-Enemy.anims = {Enemy.sprite:anim(1, 1, 1)}
 
-function Enemy.new(x, y)
-  local self = setmetatable({}, Enemy)
-
+function Enemy:init(x, y)
   self.collider = {entity = self, w = self.w, h = self.h}
   self:move(x, y)
-
-  return self
 end
 
 function Enemy:move(x, y)
@@ -27,8 +22,8 @@ function Enemy:move(x, y)
   self.collider.y = y
 end
 
-function Enemy:anim()
-  return self.anims[1]
+function Enemy:quad()
+  return self.sprite:quad(1, 1)
 end
 
 return Enemy

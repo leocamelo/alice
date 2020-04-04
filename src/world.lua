@@ -1,17 +1,15 @@
 local tiny = require('vendor.tiny')
 local bump = require('vendor.bump')
+local Class = require('src.class')
+
+local World = Class.new()
+
+World.cell_size = 64
 
 local updater_filter = tiny.rejectAll('drawer')
 local drawer_filter = tiny.requireAll('drawer')
 
-local World = {}
-World.__index = World
-
-World.cell_size = 64
-
-function World.new(...)
-  local self = setmetatable({}, World)
-
+function World:init(...)
   self.tiny = tiny.world(...)
   self.bump = bump.newWorld(self.cell_size)
 
@@ -19,8 +17,6 @@ function World.new(...)
     system.world = self
     system.physics = self.bump
   end
-
-  return self
 end
 
 function World:add(entity)

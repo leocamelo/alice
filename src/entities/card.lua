@@ -1,10 +1,10 @@
 local Enum = require('src.enum')
+local Class = require('src.class')
 local Sprite = require('src.sprite')
 
 local Suits = Enum.new('cup', 'pen', 'sword', 'wand')
 
-local Card = {}
-Card.__index = Card
+local Card = Class.new()
 
 Card.is_card = true
 
@@ -18,15 +18,11 @@ Card.spells = {
   }
 }
 
-function Card.new(suit, number)
-  local self = setmetatable({}, Card)
-
+function Card:init(suit, number)
   self.suit = Suits:case(suit)
   self.number = number
 
   self.opacity = 1
-
-  return self
 end
 
 function Card:cast(player)

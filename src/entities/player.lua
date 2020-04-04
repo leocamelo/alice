@@ -1,11 +1,11 @@
 local Enum = require('src.enum')
+local Class = require('src.class')
 local Sprite = require('src.sprite')
 local Direction = require('src.direction')
 
 local Status = Enum.new('iddle', 'running')
 
-local Player = {}
-Player.__index = Player
+local Player = Class.new()
 
 Player.is_player = true
 
@@ -41,16 +41,12 @@ Player.anims = {
 Player.anims.iddle.left = Player.anims.iddle.right:clone():flipH()
 Player.anims.running.left = Player.anims.running.right:clone():flipH()
 
-function Player.new(x, y)
-  local self = setmetatable({}, Player)
-
+function Player:init(x, y)
   self.status = Status.iddle()
   self.direction = Direction.down()
 
   self.collider = {entity = self, w = self.collider_w, h = self.collider_h}
   self:move(x + self.collider_offset.x, y + self.collider_offset.y)
-
-  return self
 end
 
 function Player:update()

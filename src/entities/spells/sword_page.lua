@@ -1,5 +1,6 @@
-local Spell = {}
-Spell.__index = Spell
+local Class = require('src.class')
+
+local Spell = Class.new()
 
 Spell.is_spell = true
 Spell.is_arrow = true
@@ -8,9 +9,7 @@ Spell.w = 32
 Spell.h = 32
 Spell.speed = 500
 
-function Spell.new(player)
-  local self = setmetatable({}, Spell)
-
+function Spell:init(player)
   self.player = player
 
   self.direction = player.direction:clone()
@@ -18,8 +17,6 @@ function Spell.new(player)
 
   local ox, oy = self:player_offset()
   self:move(player.x + ox, player.y + oy)
-
-  return self
 end
 
 function Spell:player_offset()

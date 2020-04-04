@@ -1,13 +1,15 @@
 local tiny = require('vendor.tiny')
+local Direction = require('src.direction')
+
 local system = tiny.processingSystem()
 
 system.filter = tiny.requireAll('is_arrow')
 
-local Direction = require('src.direction')
-
 local function collision_filter(ca, cb)
-  if cb.entity.is_player then return 'cross'
-  elseif cb.entity.is_enemy then return 'touch'
+  if cb.entity.is_player then
+    return 'cross'
+  elseif cb.entity.is_enemy then
+    return 'touch'
   end
 end
 

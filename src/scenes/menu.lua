@@ -1,7 +1,7 @@
 local Scene = require('src.scene')
-local scene = Scene.new('menu')
-
 local Observer = require('src.observer')
+
+local scene = Scene.new('menu')
 local observer = Observer.new()
 
 local options

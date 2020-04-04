@@ -1,16 +1,14 @@
-local Game = {}
-Game.__index = Game
+local Class = require('src.class')
 
-function Game.new(initscene, ...)
-  local self = setmetatable({}, Game)
+local Game = Class.new()
 
+function Game:init(initscene, ...)
   self.scenes = {}
   for _, scene in ipairs({initscene, ...}) do
     self.scenes[scene.id] = scene
   end
 
   self:play(initscene.id)
-  return self
 end
 
 function Game:callback(key, ...)

@@ -1,12 +1,10 @@
-local Scene = {}
+local Class = require('src.class')
 
-function Scene.new(id)
-  local self = {}
+local Scene = Class.new()
 
+function Scene:init(id)
   self.id = id
   self.loaded = false
-
-  return self
 end
 
 return Scene

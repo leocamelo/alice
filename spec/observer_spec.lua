@@ -17,6 +17,7 @@ describe('Observer', function()
   describe(':observe', function()
     it('adds callback to key', function()
       local callback = function() end
+
       observer:observe('foo', callback)
 
       assert.are.equals(#observer.callbacks.foo, 1)
@@ -28,6 +29,7 @@ describe('Observer', function()
     it('calls matched callbacks by key', function()
       local callback1 = spy.new()
       local callback2 = spy.new()
+
       observer:observe('foo', callback1)
       observer:observe('foo', callback2)
       observer:trigger('foo', 'bar')

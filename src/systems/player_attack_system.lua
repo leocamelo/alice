@@ -1,7 +1,7 @@
 local tiny = require('vendor.tiny')
-local system = tiny.processingSystem()
-
 local Card = require('src.entities.card')
+
+local system = tiny.processingSystem()
 
 system.filter = tiny.requireAll('is_player')
 

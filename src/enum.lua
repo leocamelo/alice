@@ -1,12 +1,9 @@
-local Enum = {}
-Enum.__index = Enum
+local Class = require('src.class')
 
-local EnumCase = {}
-EnumCase.__index = EnumCase
+local Enum = Class.new()
+local EnumCase = Class.new()
 
-function Enum.new(...)
-  local self = setmetatable({}, Enum)
-
+function Enum:init(...)
   self.options = {...}
   self.options_index = {}
 
@@ -17,8 +14,6 @@ function Enum.new(...)
       return EnumCase.new(i, self.options)
     end
   end
-
-  return self
 end
 
 function Enum:case(option)
@@ -26,9 +21,7 @@ function Enum:case(option)
   return EnumCase.new(index, self.options)
 end
 
-function EnumCase.new(index, options)
-  local self = setmetatable({}, EnumCase)
-
+function EnumCase:init(index, options)
   self.index = index
   self.options = options
 
@@ -41,8 +34,6 @@ function EnumCase.new(index, options)
       return self.index == i
     end
   end
-
-  return self
 end
 
 function EnumCase:clone()
