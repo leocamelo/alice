@@ -45,6 +45,10 @@ function EnumCase.new(index, options)
   return self
 end
 
+function EnumCase:clone()
+  return self.new(self.index, self.options)
+end
+
 function EnumCase:to_s()
   return self.options[self.index]
 end

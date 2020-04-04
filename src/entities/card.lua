@@ -24,7 +24,7 @@ function Card.new(suit, number)
   self.suit = Suits:case(suit)
   self.number = number
 
-  self.opacity = 1.5
+  self.opacity = 1
 
   return self
 end

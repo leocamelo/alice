@@ -5,18 +5,23 @@ system.filter = tiny.requireAll('is_player')
 
 local Direction = require('src.direction')
 
+local function collision_filter(ca, cb)
+  if cb.entity.is_enemy then
+    return 'slide'
+  end
+end
+
 function system:process(e, dt)
   local is_running = false
 
   for i, dir in ipairs(e.direction.options) do
     if love.keyboard.isDown(dir) then
+      is_running = true
       e.status.running()
       e.direction.index = i
 
       local gx, gy = Direction.apply(e, dir, dt)
-      e:move(self.physics:move(e.collider, gx, gy, e.collision_filter))
-
-      is_running = true
+      e:move(self.physics:move(e.collider, gx, gy, collision_filter))
       break
     end
   end

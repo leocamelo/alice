@@ -1,9 +1,8 @@
-local Direction = require('src.direction')
-
 local Spell = {}
 Spell.__index = Spell
 
 Spell.is_spell = true
+Spell.is_arrow = true
 
 Spell.w = 32
 Spell.h = 32
@@ -14,42 +13,28 @@ function Spell.new(player)
 
   self.player = player
 
-  self.dir = player.direction:to_s()
+  self.direction = player.direction:clone()
   self.collider = {entity = self, w = self.w, h = self.h}
 
-  local offset = self:player_offset()
-  self:move(player.x + offset.x, player.y + offset.y)
+  local ox, oy = self:player_offset()
+  self:move(player.x + ox, player.y + oy)
 
   return self
 end
 
 function Spell:player_offset()
-  if self.dir == 'up' then
-    return {
-      x = (self.player.w - self.w) / 2,
-      y = -self.player.spell_offset
-    }
-  elseif self.dir == 'down' then
-    return {
-      x = (self.player.w - self.w) / 2,
-      y = self.player.h + self.player.spell_offset
-    }
-  elseif self.dir == 'left' then
-    return {
-      x = -self.player.spell_offset - self.w,
-      y = self.player.collider_offset.y
-    }
-  elseif self.dir == 'right' then
-    return {
-      x = self.player.w + self.player.spell_offset,
-      y = self.player.collider_offset.y
-    }
-  end
-end
+  local direction = self.direction
+  local player = self.player
 
-function Spell:update(physics, dt)
-  local gx, gy = Direction.apply(self, self.dir, dt)
-  self:move(physics:move(self.collider, gx, gy, self.collision_filter))
+  if direction.is_up() then
+    return (player.w - self.w) / 2, -player.spell_offset
+  elseif direction.is_down() then
+    return (player.w - self.w) / 2, player.h + player.spell_offset
+  elseif direction.is_left() then
+    return -player.spell_offset - self.w, (player.h - self.h) / 2
+  elseif direction.is_right() then
+    return player.w + player.spell_offset, (player.h - self.h) / 2
+  end
 end
 
 function Spell:move(x, y)
@@ -58,12 +43,6 @@ function Spell:move(x, y)
 
   self.collider.x = x
   self.collider.y = y
-end
-
-function Spell:collision_filter(other)
-  if other.entity.is_player then return 'cross'
-  elseif other.entity.is_enemy then return 'touch'
-  end
 end
 
 return Spell

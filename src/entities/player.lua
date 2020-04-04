@@ -16,6 +16,7 @@ Player.sprite = Sprite.new('player', Player.w, Player.h)
 Player.speed = 300
 Player.collider_w = 32
 Player.collider_h = 32
+
 Player.collider_offset = {
   x = (Player.w - Player.collider_w) / 2,
   y = Player.h - Player.collider_h
@@ -66,12 +67,6 @@ function Player:move(x, y)
   self.collider.x = x
   self.collider.y = y
   self:update()
-end
-
-function Player:collision_filter(other)
-  if other.entity.is_enemy then
-    return 'slide'
-  end
 end
 
 function Player:set_card(card)
