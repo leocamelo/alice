@@ -12,6 +12,7 @@ Spell.speed = 500
 function Spell:init(player)
   self.player = player
 
+  self.countdown = 0.5
   self.direction = player.direction:clone()
   self.collider = {entity = self, w = self.w, h = self.h}
 

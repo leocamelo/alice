@@ -5,8 +5,8 @@ local system = tiny.processingSystem()
 
 system.filter = tiny.requireAll('is_player')
 
-local function collision_filter(ca, cb)
-  if cb.entity.is_enemy then
+local function collision(a, b)
+  if b.entity.is_enemy then
     return 'slide'
   end
 end
@@ -21,7 +21,7 @@ function system:process(e, dt)
       e.direction.index = i
 
       local gx, gy = Direction.apply(e, dir, dt)
-      e:move(self.physics:move(e.collider, gx, gy, collision_filter))
+      e:move(self.physics:move(e.collider, gx, gy, collision))
       break
     end
   end

@@ -15,6 +15,8 @@ function scene:load()
     require('src.systems.player_attack_system'),
     require('src.systems.spell_arrow_system'),
     require('src.systems.anim_update_system'),
+    require('src.systems.countdown_system'),
+
     require('src.systems.anim_draw_system'),
     require('src.systems.static_draw_system')
   )
