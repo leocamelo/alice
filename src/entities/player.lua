@@ -23,22 +23,6 @@ Player.spell_offset = 8
 
 Player.sprite = Sprite.new('player', Player.w, Player.h)
 
-Player.anims = {
-  iddle = {
-    up = Player.sprite:anim(0.1, '1-4', 1),
-    down = Player.sprite:anim(0.1, '1-4', 2),
-    right = Player.sprite:anim(0.1, '1-4', 3)
-  },
-  running = {
-    up = Player.sprite:anim(0.1, '1-4', 4),
-    down = Player.sprite:anim(0.1, '1-4', 5),
-    right = Player.sprite:anim(0.1, '1-4', 6)
-  }
-}
-
-Player.anims.iddle.left = Player.anims.iddle.right:clone():flipH()
-Player.anims.running.left = Player.anims.running.right:clone():flipH()
-
 function Player:init(x, y)
   self.x = x
   self.y = y
@@ -48,6 +32,22 @@ function Player:init(x, y)
 
   self.collider = Collider.new(self)
   self.collider.on_move = self.move_card
+
+  self.anims = {
+    iddle = {
+      up = self.sprite:anim(0.1, '1-4', 1),
+      down = self.sprite:anim(0.1, '1-4', 2),
+      right = self.sprite:anim(0.1, '1-4', 3)
+    },
+    running = {
+      up = self.sprite:anim(0.1, '1-4', 4),
+      down = self.sprite:anim(0.1, '1-4', 5),
+      right = self.sprite:anim(0.1, '1-4', 6)
+    }
+  }
+
+  self.anims.iddle.left = self.anims.iddle.right:clone():flipH()
+  self.anims.running.left = self.anims.running.right:clone():flipH()
 end
 
 function Player:move_card()

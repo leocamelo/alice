@@ -10,19 +10,19 @@ local state = {
 }
 
 function scene:load()
+  math.randomseed(os.time())
+
   world = World.new(
     require('src.systems.player_move_system'),
     require('src.systems.player_attack_system'),
+    require('src.systems.mob_spawn_system'),
+    require('src.systems.mob_move_system'),
     require('src.systems.spell_arrow_system'),
     require('src.systems.countdown_system'),
     require('src.systems.anim_update_system'),
     require('src.systems.draw_stack_system'),
     require('src.systems.draw_ballon_system')
   )
-
-  local Mob = require('src.entities.mob')
-  world:add(Mob.new(100, 100))
-  world:add(Mob.new(500, 100))
 
   local Player = require('src.entities.player')
   world:add(Player.new(state.x, state.y))
@@ -39,7 +39,7 @@ function scene:update(dt)
 end
 
 function scene:draw()
-  love.graphics.setBackgroundColor(0.4, 0.4, 0.5)
+  love.graphics.setBackgroundColor(0.6, 0.6, 0.7)
   world:draw()
 end
 

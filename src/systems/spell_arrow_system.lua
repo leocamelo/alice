@@ -14,10 +14,14 @@ end
 
 function system:process(e, dt)
   local gx, gy = e.collider:apply_speed(e.speed, e.direction:to_s(), dt)
-  local x, y, _, len = self.physics:move(e.collider, gx, gy, collision)
+  local x, y, cols, len = self.physics:move(e.collider, gx, gy, collision)
 
   if len > 0 then
     self.world:remove(e)
+
+    for _, c in pairs(cols) do
+      self.world:remove(c.other.entity)
+    end
   else
     e.collider:move(x, y)
   end

@@ -7,7 +7,7 @@ system.filter = tiny.requireAll('countdown')
 function system:process(e, dt)
   if e.countdown > 0 then
     e.countdown = e.countdown - dt
-  else
+  elseif e.is_transient then
     self.world:remove(e)
   end
 end

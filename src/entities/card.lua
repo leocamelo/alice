@@ -8,6 +8,7 @@ local Card = Class.new()
 
 Card.is_card = true
 Card.is_ballon = true
+Card.is_transient = true
 
 Card.w = 34
 Card.h = 58
