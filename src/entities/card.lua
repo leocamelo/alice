@@ -7,6 +7,7 @@ local Suits = Enum.new('cup', 'pen', 'sword', 'wand')
 local Card = Class.new()
 
 Card.is_card = true
+Card.is_ballon = true
 
 Card.w = 34
 Card.h = 58

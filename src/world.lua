@@ -53,6 +53,7 @@ function World:draw_colliders()
   for _, c in pairs(self.bump:getItems()) do
     love.graphics.setColor(1, 0, 0)
     love.graphics.rectangle('line', c.x, c.y, c.w, c.h)
+    love.graphics.setColor(1, 1, 1)
   end
 end
 

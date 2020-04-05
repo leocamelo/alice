@@ -16,8 +16,8 @@ function scene:load()
     require('src.systems.spell_arrow_system'),
     require('src.systems.countdown_system'),
     require('src.systems.anim_update_system'),
-    require('src.systems.anim_draw_system'),
-    require('src.systems.static_draw_system')
+    require('src.systems.draw_stack_system'),
+    require('src.systems.draw_ballon_system')
   )
 
   local Mob = require('src.entities.mob')
@@ -40,10 +40,6 @@ end
 
 function scene:draw()
   love.graphics.setBackgroundColor(0.4, 0.4, 0.5)
-
-  love.graphics.setColor(1, 1, 1)
-  love.graphics.print('press esc to back', 50, 550)
-
   world:draw()
 end
 

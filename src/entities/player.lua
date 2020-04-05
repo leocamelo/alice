@@ -9,6 +9,7 @@ local Status = Enum.new('iddle', 'running')
 local Player = Class.new()
 
 Player.is_player = true
+Player.is_stack = true
 
 Player.w = 64
 Player.h = 64

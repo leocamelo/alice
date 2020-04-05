@@ -4,10 +4,10 @@ local system = tiny.processingSystem()
 
 system.filter = tiny.requireAll('is_arrow')
 
-local function collision(a, b)
-  if b.entity.is_player then
+local function collision(c1, c2)
+  if c2.entity.is_player then
     return 'cross'
-  elseif b.entity.is_mob then
+  elseif c2.entity.is_mob then
     return 'touch'
   end
 end

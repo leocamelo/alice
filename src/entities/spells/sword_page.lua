@@ -5,6 +5,7 @@ local Spell = Class.new()
 
 Spell.is_spell = true
 Spell.is_arrow = true
+Spell.is_stack = true
 
 Spell.w = 32
 Spell.h = 32

@@ -4,8 +4,8 @@ local system = tiny.processingSystem()
 
 system.filter = tiny.requireAll('is_player')
 
-local function collision(a, b)
-  if b.entity.is_mob then
+local function collision(c1, c2)
+  if c2.entity.is_mob then
     return 'slide'
   end
 end

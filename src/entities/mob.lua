@@ -5,6 +5,7 @@ local Collider = require('src.collider')
 local Mob = Class.new()
 
 Mob.is_mob = true
+Mob.is_stack = true
 
 Mob.w = 64
 Mob.h = 57
