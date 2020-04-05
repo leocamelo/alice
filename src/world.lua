@@ -51,6 +51,7 @@ end
 
 function World:draw_debug()
   love.graphics.setColor(1, 0, 0)
+  love.graphics.setLineWidth(2)
   love.graphics.print('FPS: ' .. love.timer.getFPS( ), 16, 16)
 
   for _, c in pairs(self.bump:getItems()) do

@@ -39,4 +39,16 @@ function Spell:player_offset()
   end
 end
 
+function Spell:raw_draw()
+  local r = self.w / 2
+  local x = self.x + r
+  local y = self.y + r
+
+  love.graphics.circle('fill', x, y, r)
+
+  love.graphics.setColor(0.12, 0.13, 0.2)
+  love.graphics.setLineWidth(3)
+  love.graphics.circle('line', x, y, r)
+end
+
 return Spell

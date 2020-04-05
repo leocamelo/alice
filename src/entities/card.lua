@@ -24,6 +24,7 @@ Card.spells = {
 function Card:init(suit, number)
   self.suit = Suits:case(suit)
   self.number = number
+
   self.countdown = 1
 end
 

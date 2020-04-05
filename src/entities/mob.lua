@@ -33,7 +33,7 @@ function Mob:init(x, y)
 end
 
 function Mob:reset_countdown()
-  self.countdown = math.random(0, self.countdown_cicle)
+  self.countdown = math.random(1, self.countdown_cicle)
 end
 
 function Mob:anim()
