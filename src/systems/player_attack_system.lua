@@ -8,7 +8,7 @@ system.filter = tiny.requireAll('is_player')
 function system:process(e, dt)
   if e.card then
     if e.card.countdown > 0 then
-      e.card.opacity = e.card.countdown
+      e.card.opacity = math.min(e.card.countdown, 1)
     else
       e.card = nil
     end

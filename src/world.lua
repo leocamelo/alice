@@ -45,15 +45,16 @@ function World:draw()
   self.tiny:update(0, drawer_filter)
 
   if os.getenv('DEBUG') then
-    self:draw_colliders()
+    self:draw_debug()
   end
 end
 
-function World:draw_colliders()
+function World:draw_debug()
+  love.graphics.setColor(1, 0, 0)
+  love.graphics.print('FPS: ' .. love.timer.getFPS( ), 16, 16)
+
   for _, c in pairs(self.bump:getItems()) do
-    love.graphics.setColor(1, 0, 0)
     love.graphics.rectangle('line', c.x, c.y, c.w, c.h)
-    love.graphics.setColor(1, 1, 1)
   end
 end
 

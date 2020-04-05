@@ -5,11 +5,13 @@ local system = tiny.sortedProcessingSystem()
 system.drawer = true
 system.filter = tiny.requireAll('is_stack')
 
-system.preProcess = system.onModify
-system.onModify = nil
-
 function system:compare(e1, e2)
   return e1.y + e1.h < e2.y + e2.h
+end
+
+function system:preProcess()
+  self:onModify()
+  love.graphics.setColor(1, 1, 1)
 end
 
 function system:process(e)
