@@ -1,12 +1,11 @@
 local tiny = require('vendor.tiny')
-local Direction = require('src.direction')
 
 local system = tiny.processingSystem()
 
 system.filter = tiny.requireAll('is_player')
 
 local function collision(a, b)
-  if b.entity.is_enemy then
+  if b.entity.is_mob then
     return 'slide'
   end
 end
@@ -20,8 +19,8 @@ function system:process(e, dt)
       e.status.running()
       e.direction.index = i
 
-      local gx, gy = Direction.apply(e, dir, dt)
-      e:move(self.physics:move(e.collider, gx, gy, collision))
+      local gx, gy = e.collider:apply_speed(e.speed, dir, dt)
+      e.collider:move(self.physics:move(e.collider, gx, gy, collision))
       break
     end
   end

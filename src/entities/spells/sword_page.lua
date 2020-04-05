@@ -1,4 +1,5 @@
 local Class = require('src.class')
+local Collider = require('src.collider')
 
 local Spell = Class.new()
 
@@ -11,13 +12,14 @@ Spell.speed = 500
 
 function Spell:init(player)
   self.player = player
-
-  self.countdown = 0.5
   self.direction = player.direction:clone()
-  self.collider = {entity = self, w = self.w, h = self.h}
 
   local ox, oy = self:player_offset()
-  self:move(player.x + ox, player.y + oy)
+  self.x = player.x + ox
+  self.y = player.y + oy
+
+  self.collider = Collider.new(self)
+  self.countdown = 0.5
 end
 
 function Spell:player_offset()
@@ -33,14 +35,6 @@ function Spell:player_offset()
   elseif direction.is_right() then
     return player.w + player.spell_offset, (player.h - self.h) / 2
   end
-end
-
-function Spell:move(x, y)
-  self.x = x
-  self.y = y
-
-  self.collider.x = x
-  self.collider.y = y
 end
 
 return Spell

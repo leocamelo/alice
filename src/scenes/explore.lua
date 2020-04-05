@@ -14,16 +14,15 @@ function scene:load()
     require('src.systems.player_move_system'),
     require('src.systems.player_attack_system'),
     require('src.systems.spell_arrow_system'),
-    require('src.systems.anim_update_system'),
     require('src.systems.countdown_system'),
-
+    require('src.systems.anim_update_system'),
     require('src.systems.anim_draw_system'),
     require('src.systems.static_draw_system')
   )
 
-  local Enemy = require('src.entities.enemy')
-  world:add(Enemy.new(100, 100))
-  world:add(Enemy.new(500, 100))
+  local Mob = require('src.entities.mob')
+  world:add(Mob.new(100, 100))
+  world:add(Mob.new(500, 100))
 
   local Player = require('src.entities.player')
   world:add(Player.new(state.x, state.y))
@@ -40,7 +39,7 @@ function scene:update(dt)
 end
 
 function scene:draw()
-  love.graphics.setBackgroundColor(0.3, 0.5, 0.3)
+  love.graphics.setBackgroundColor(0.4, 0.4, 0.5)
 
   love.graphics.setColor(1, 1, 1)
   love.graphics.print('press esc to back', 50, 550)

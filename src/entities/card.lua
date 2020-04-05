@@ -10,6 +10,7 @@ Card.is_card = true
 
 Card.w = 34
 Card.h = 58
+
 Card.sprite = Sprite.new('card', Card.w, Card.h)
 
 Card.spells = {
