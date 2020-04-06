@@ -26,16 +26,21 @@ end
 
 function Spell:player_offset()
   local direction = self.direction
+
   local player = self.player
+  local offset = player.spell_offset
+
+  local center_x = (player.w - self.w) / 2
+  local center_y = (player.h - self.h) / 2
 
   if direction.is_up() then
-    return (player.w - self.w) / 2, -player.spell_offset
+    return center_x, player.collider.offset.y - self.h - offset
   elseif direction.is_down() then
-    return (player.w - self.w) / 2, player.h + player.spell_offset
+    return center_x, player.h + offset
   elseif direction.is_left() then
-    return -player.spell_offset - self.w, (player.h - self.h) / 2
+    return player.collider.offset.x - self.w - offset, center_y
   elseif direction.is_right() then
-    return player.w + player.spell_offset, (player.h - self.h) / 2
+    return player.w + offset, center_y
   end
 end
 
@@ -45,7 +50,6 @@ function Spell:raw_draw()
   local y = self.y + r
 
   love.graphics.circle('fill', x, y, r)
-
   love.graphics.setColor(0.12, 0.13, 0.2)
   love.graphics.setLineWidth(3)
   love.graphics.circle('line', x, y, r)

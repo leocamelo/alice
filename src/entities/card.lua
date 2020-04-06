@@ -26,6 +26,7 @@ function Card:init(suit, number)
   self.number = number
 
   self.countdown = 1
+  self.cached_quad = self.sprite:quad(self.suit.index, number)
 end
 
 function Card:cast(player)
@@ -33,7 +34,7 @@ function Card:cast(player)
 end
 
 function Card:quad()
-  return self.sprite:quad(self.suit.index, self.number)
+  return self.cached_quad
 end
 
 return Card

@@ -45,7 +45,6 @@ function Player:init(x, y)
       right = self.sprite:anim(0.1, '1-4', 6)
     }
   }
-
   self.anims.iddle.left = self.anims.iddle.right:clone():flipH()
   self.anims.running.left = self.anims.running.right:clone():flipH()
 end
