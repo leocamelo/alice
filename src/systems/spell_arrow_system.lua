@@ -20,7 +20,9 @@ function system:process(e, dt)
     self.world:remove(e)
 
     for _, c in pairs(cols) do
-      self.world:remove(c.other.entity)
+      if c.other.entity.is_mob then
+        self.world:remove(c.other.entity)
+      end
     end
   else
     e.collider:move(x, y)

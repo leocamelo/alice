@@ -5,14 +5,14 @@ local system = tiny.system()
 
 system.filter = tiny.requireAll('is_mob')
 
-system.countdown_cicle = 2
+system.countdown_start = 2
 system.mob_limit = 10
 
 function system:onAddToWorld()
   local ww, wh = love.graphics.getDimensions()
   self.bonds = {w = ww - Mob.w, h = wh - Mob.h}
 
-  self.countdown = self.countdown_cicle
+  self.countdown = self.countdown_start
 end
 
 function system:update(dt)
@@ -26,7 +26,7 @@ function system:update(dt)
 
     if len == 0 then
       self.world:add(Mob.new(x, y))
-      self.countdown = self.countdown_cicle
+      self.countdown = self.countdown_start
     end
   end
 end

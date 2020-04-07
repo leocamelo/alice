@@ -11,6 +11,7 @@ Spell.is_transient = true
 Spell.w = 32
 Spell.h = 32
 Spell.speed = 500
+Spell.countdown_start = 0.5
 
 function Spell:init(player)
   self.player = player
@@ -21,7 +22,7 @@ function Spell:init(player)
   self.y = player.y + oy
 
   self.collider = Collider.new(self)
-  self.countdown = 0.5
+  self.countdown = self.countdown_start
 end
 
 function Spell:player_offset()
@@ -44,7 +45,7 @@ function Spell:player_offset()
   end
 end
 
-function Spell:raw_draw()
+function Spell:draw()
   local r = self.w / 2
   local x = self.x + r
   local y = self.y + r

@@ -3,6 +3,7 @@ local Class = require('src.class')
 local Sprite = require('src.sprite')
 
 local Suits = Enum.new('cup', 'pen', 'sword', 'wand')
+local Faces = Enum.new('page', 'page', 'page', 'page')
 
 local Card = Class.new()
 
@@ -12,25 +13,21 @@ Card.is_transient = true
 
 Card.w = 34
 Card.h = 58
+Card.countdown_start = 1
 
 Card.sprite = Sprite.new('card', Card.w, Card.h)
 
-Card.spells = {
-  sword = {
-    require('src.entities.spells.sword_page')
-  }
-}
-
 function Card:init(suit, number)
   self.suit = Suits:case(suit)
-  self.number = number
+  self.face = Faces:case(Faces.options[number])
 
-  self.countdown = 1
+  self.countdown = self.countdown_start
   self.cached_quad = self.sprite:quad(self.suit.index, number)
 end
 
 function Card:cast(player)
-  return self.spells[self.suit:to_s()][1].new(player)
+  local spell = self.suit:to_s() .. '.' .. self.face:to_s()
+  return require('src.entities.spells.' .. spell).new(player)
 end
 
 function Card:quad()

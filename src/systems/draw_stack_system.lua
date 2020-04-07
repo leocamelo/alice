@@ -19,8 +19,8 @@ function system:process(e)
     e:anim():draw(e.sprite.image, e.x, e.y)
   elseif e.quad then
     love.graphics.draw(e.sprite.image, e:quad(), e.x, e.y)
-  elseif e.raw_draw then
-    e:raw_draw()
+  elseif e.draw then
+    e:draw()
   end
 end
 

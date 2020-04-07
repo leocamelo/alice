@@ -11,7 +11,7 @@ Mob.is_stack = true
 Mob.w = 64
 Mob.h = 57
 Mob.speed = 50
-Mob.countdown_cicle = 3
+Mob.countdown_start = 3
 
 Mob.collider_w = 56
 Mob.collider_h = 32
@@ -34,7 +34,7 @@ function Mob:init(x, y)
 end
 
 function Mob:reset_countdown()
-  self.countdown = math.random(self.countdown_cicle)
+  self.countdown = math.random(self.countdown_start)
 end
 
 function Mob:anim()
