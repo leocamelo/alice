@@ -5,9 +5,7 @@ local system = tiny.processingSystem()
 system.filter = tiny.requireAll('is_arrow')
 
 local function collision(c1, c2)
-  if c2.entity.is_player then
-    return 'cross'
-  elseif c2.entity.is_mob then
+  if c2.entity.hp then
     return 'touch'
   end
 end
@@ -20,8 +18,10 @@ function system:process(e, dt)
     self.world:remove(e)
 
     for _, c in pairs(cols) do
-      if c.other.entity.is_mob then
-        self.world:remove(c.other.entity)
+      local target = c.other.entity
+
+      if target.hp and target ~= e.player then
+        target.damage = 1
       end
     end
   else

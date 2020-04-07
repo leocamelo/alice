@@ -11,6 +11,7 @@ Mob.is_stack = true
 Mob.w = 64
 Mob.h = 57
 Mob.speed = 50
+Mob.max_hp = 2
 Mob.countdown_start = 3
 
 Mob.collider_w = 56
@@ -21,6 +22,8 @@ Mob.sprite = Sprite.new('mob', Mob.w, Mob.h)
 function Mob:init(x, y)
   self.x = x
   self.y = y
+
+  self.hp = self.max_hp
 
   self.is_running = false
   self.direction = Direction:case(({'left', 'right'})[math.random(2)])

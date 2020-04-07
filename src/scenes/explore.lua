@@ -18,6 +18,7 @@ function scene:load()
     require('src.systems.mob_spawn_system'),
     require('src.systems.mob_move_system'),
     require('src.systems.spell_arrow_system'),
+    require('src.systems.damage_system'),
     require('src.systems.countdown_system'),
     require('src.systems.anim_update_system'),
     require('src.systems.draw_stack_system'),

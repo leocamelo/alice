@@ -14,6 +14,7 @@ Player.is_stack = true
 Player.w = 64
 Player.h = 64
 Player.speed = 300
+Player.max_hp = 10
 
 Player.collider_w = 32
 Player.collider_h = 32
@@ -26,6 +27,8 @@ Player.sprite = Sprite.new('player', Player.w, Player.h)
 function Player:init(x, y)
   self.x = x
   self.y = y
+
+  self.hp = self.max_hp
 
   self.status = Status.iddle()
   self.direction = Direction.down()

@@ -54,8 +54,17 @@ function World:draw_debug()
   love.graphics.setLineWidth(2)
   love.graphics.print('FPS: ' .. love.timer.getFPS( ), 16, 16)
 
-  for _, c in pairs(self.bump:getItems()) do
-    love.graphics.rectangle('line', c.x, c.y, c.w, c.h)
+  for _, e in ipairs(self.tiny.entities) do
+    local c = e.collider
+
+    if c then
+      love.graphics.rectangle('line', c.x, c.y, c.w, c.h)
+    end
+
+    if e.hp then
+      local label = string.format('HP: %02d/%02d', e.hp, e.max_hp)
+      love.graphics.print(label, e.x + e.w, e.y)
+    end
   end
 end
 

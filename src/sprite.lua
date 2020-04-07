@@ -6,7 +6,7 @@ local Sprite = Class.new()
 Sprite.path = 'assets/sprites/%s.png'
 
 function Sprite:init(name, w, h)
-  self.image = love.graphics.newImage(self.path:format(name))
+  self.image = love.graphics.newImage(string.format(self.path, name))
   self.grid = anim8.newGrid(w, h, self.image:getDimensions())
 end
 
