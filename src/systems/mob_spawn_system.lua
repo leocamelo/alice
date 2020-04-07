@@ -1,4 +1,5 @@
 local tiny = require('vendor.tiny')
+local screen = require('src.screen')
 local Mob = require('src.entities.mob')
 
 local system = tiny.system()
@@ -9,9 +10,7 @@ system.countdown_start = 2
 system.mob_limit = 10
 
 function system:onAddToWorld()
-  local ww, wh = love.graphics.getDimensions()
-  self.bonds = {w = ww - Mob.w, h = wh - Mob.h}
-
+  self.bonds = screen:bonds(Mob)
   self.countdown = self.countdown_start
 end
 

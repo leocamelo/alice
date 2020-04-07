@@ -1,13 +1,9 @@
 local Scene = require('src.scene')
 local World = require('src.world')
+local screen = require('src.screen')
 
 local scene = Scene.new('explore')
 local world
-
-local state = {
-  x = 350,
-  y = 350
-}
 
 function scene:load()
   math.randomseed(os.time())
@@ -26,7 +22,7 @@ function scene:load()
   )
 
   local Player = require('src.entities.player')
-  world:add(Player.new(state.x, state.y))
+  world:add(Player.new(screen:center(Player)))
 end
 
 function scene:keypressed(key)

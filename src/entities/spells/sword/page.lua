@@ -1,3 +1,4 @@
+local screen = require('src.screen')
 local Class = require('src.class')
 local Collider = require('src.collider')
 
@@ -30,9 +31,7 @@ function Spell:player_offset()
 
   local player = self.player
   local offset = player.spell_offset
-
-  local center_x = (player.w - self.w) / 2
-  local center_y = (player.h - self.h) / 2
+  local center_x, center_y = screen.center(player, self)
 
   if direction.is_up() then
     return center_x, player.collider.offset.y - self.h - offset

@@ -48,7 +48,7 @@ function scene:draw()
   for i, option in ipairs(options) do
     local color = i == selected and 1 or 0.5
     love.graphics.setColor(color, color, color)
-    love.graphics.print(option.label, 350, 200 + i * 20)
+    love.graphics.print(option.label, 400, 200 + i * 20)
   end
 end
 
