@@ -6,9 +6,7 @@ function Class.new()
 
   function class.new(...)
     local obj = setmetatable({}, class)
-
     obj:init(...)
-
     return obj
   end
 

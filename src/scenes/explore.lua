@@ -1,5 +1,6 @@
 local Scene = require('src.scene')
 local World = require('src.world')
+local Joystick = require('src.joystick')
 local screen = require('src.screen')
 
 local scene = Scene.new('explore')
@@ -22,13 +23,17 @@ function scene:load()
   )
 
   local Player = require('src.entities.player')
-  world:add(Player.new(screen:center(Player)))
+  world:add(Player.new(Joystick.new(), screen:center(Player)))
 end
 
 function scene:keypressed(key)
   if key == 'escape' then
     self:play('menu')
   end
+end
+
+function scene:gamepadpressed(joystick, button)
+  self:keypressed(Joystick.keymap[button])
 end
 
 function scene:update(dt)

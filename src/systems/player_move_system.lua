@@ -14,7 +14,7 @@ function system:process(e, dt)
   local is_running = false
 
   for i, dir in ipairs(e.direction.options) do
-    if love.keyboard.isDown(dir) then
+    if e.joystick:is_down('dp' .. dir) then
       is_running = true
       e.status.running()
       e.direction.index = i

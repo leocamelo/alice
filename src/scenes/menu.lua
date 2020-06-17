@@ -1,5 +1,6 @@
 local Scene = require('src.scene')
 local Observer = require('src.observer')
+local Joystick = require('src.joystick')
 
 local scene = Scene.new('menu')
 local observer = Observer.new()
@@ -40,6 +41,10 @@ end
 
 function scene:keypressed(key)
   observer:trigger(key)
+end
+
+function scene:gamepadpressed(joystick, button)
+  self:keypressed(Joystick.keymap[button])
 end
 
 function scene:draw()

@@ -24,7 +24,9 @@ Player.spell_offset = 8
 
 Player.sprite = Sprite.new('player', Player.w, Player.h)
 
-function Player:init(x, y)
+function Player:init(joystick, x, y)
+  self.joystick = joystick
+
   self.x = x
   self.y = y
 

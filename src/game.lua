@@ -35,6 +35,10 @@ function Game:keypressed(key)
   self:callback('keypressed', key)
 end
 
+function Game:gamepadpressed(joystick, button)
+  self:callback('gamepadpressed', joystick, button)
+end
+
 function Game:update(dt)
   self:callback('update', dt)
 end

@@ -11,7 +11,7 @@ Spell.is_transient = true
 
 Spell.w = 32
 Spell.h = 32
-Spell.speed = 500
+Spell.speed = 700
 Spell.countdown_start = 0.5
 
 function Spell:init(player)

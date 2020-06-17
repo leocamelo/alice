@@ -12,7 +12,7 @@ function system:process(e, dt)
     else
       e.card = nil
     end
-  elseif love.keyboard.isDown('a') and e.status.is_iddle() then
+  elseif e.joystick:is_down('x') and e.status.is_iddle() then
     e:set_card(Card.new('sword', math.random(4)))
     self.world:add(e.card)
     self.world:add(e.card:cast(e))

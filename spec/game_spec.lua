@@ -62,6 +62,16 @@ describe('Game', function()
     end)
   end)
 
+  describe(':gamepadpressed', function()
+    it('calls the gamepadpressed callback with gived arguments', function()
+      spy.on(game, 'callback')
+
+      game:gamepadpressed(1, 'a')
+
+      assert.spy(game.callback).was.called_with(game, 'gamepadpressed', 1, 'a')
+    end)
+  end)
+
   describe(':keypressed', function()
     it('calls the keypressed callback with gived key', function()
       spy.on(game, 'callback')
