@@ -1,0 +1,18 @@
+language: python
+sudo: false
+
+env:
+  - LUA="luajit 2.1"
+
+before_install:
+  - pip install hererocks
+  - hererocks env --$LUA -rlatest
+  - source env/bin/activate
+
+install:
+  - luarocks install luacheck
+  - luarocks install busted
+
+script:
+  - luacheck *.lua src spec
+  - busted
